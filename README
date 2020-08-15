@@ -8,14 +8,15 @@ For more information about the service loader facility refer to [Service Loader 
 
 This project is a modular Maven project. The following modules exist:
 ```
-service-loadeer                 -   The main project folder
-\-- service-api                 -   A Java 9 module that exports the service interface 'IncementService'. 
- \-- service-impl               -   A Java 8 legacy implementation of the service interface. 
-  \                                 This code will not reside in a module. It will be available through the legacy class path.
-   \-- service-runner           -   A Java 9 module that declares a dependency to 'service-api' since the runner is used to run the service.
-    \                               This module defines the 'requires' directive to 'service-api'.
-     \                              This module defines the 'uses' directive to declare usage of the 'IncrementService'.
-      \-- service-runner-legacy -   A Java 8 legacy project to run the whole example in the legacy class path (Not used).                  
+service-loadeer                  -   The main project folder
+\-- service-api                  -   A Java 9 module that exports the service interface 'IncementService'. 
+ \-- service-impl                -   A Java 8 legacy implementation of the service interface. 
+  \                                  This code will not reside in a module. It will be available through the legacy class path.
+   \-- service-runner            -   A Java 9 module that declares a dependency to 'service-api' since the runner 
+    \                                is used to run the service.
+     \                               This module defines the 'requires' directive to 'service-api'.
+      \                              This module defines the 'uses' directive to declare usage of the 'IncrementService'.
+       \-- service-runner-legacy -   A Java 8 legacy project to run the whole example in the legacy class path (Not used).                  
 ``` 
 ## The show case
 
@@ -25,4 +26,4 @@ This way it is possible to isolate legacy libraries and provide their services t
 
 ## The build
 
-This project builds on Travis CI. The proof that it works, is a simple 
+This project builds on Travis CI. The proof that it works, is a simple line printed to `System.err` that shows "OK.". 
