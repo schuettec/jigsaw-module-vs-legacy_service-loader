@@ -1,0 +1,28 @@
+# Java 9 and the module system
+
+Since Java 9 introduced the new module system, I wondered how module-code can access legacy libraries that are not maintained anymore. This repository contains a working show case that demonstrates how a modular application can access legacy code using a service interface and the service loader feature.
+
+For more information about the service loader facility refer to [Service Loader documentation](https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/util/ServiceLoader.html).
+
+## Project structure
+
+This project is a modular Maven project. The following modules exist:
+```
+service-loadeer                 -   The main project folder
+\-- service-api                 -   A Java 9 module that exports the service interface 'IncementService'. 
+ \-- service-impl               -   A Java 8 legacy implementation of the service interface. 
+  \                                 This code will not reside in a module. It will be available through the legacy class path.
+   \-- service-runner           -   A Java 9 module that declares a dependency to 'service-api' since the runner is used to run the service.
+    \                               This module defines the 'requires' directive to 'service-api'.
+     \                              This module defines the 'uses' directive to declare usage of the 'IncrementService'.
+      \-- service-runner-legacy -   A Java 8 legacy project to run the whole example in the legacy class path (Not used).                  
+``` 
+## The show case
+
+This project is a working example of a modular Java 9 application, that uses a Java 9 compliant module as service interface declaration. At runtime a legacy JAR is used to provide an instance of the service interface. The application then runs the legacy code "through" the Java 9 service interface.
+
+This way it is possible to isolate legacy libraries and provide their services to Java 9 modular applications.
+
+## The build
+
+This project builds on Travis CI. The proof that it works, is a simple 
