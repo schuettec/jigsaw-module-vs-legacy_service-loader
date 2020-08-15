@@ -1,0 +1,4 @@
+--patch-module
+service.runner=_
+--add-reads
+service.runner=ALL-UNNAMED

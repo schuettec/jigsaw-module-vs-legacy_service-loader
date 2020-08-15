@@ -1,0 +1,4 @@
+--patch-module
+service.api=_
+--add-reads
+service.api=ALL-UNNAMED
