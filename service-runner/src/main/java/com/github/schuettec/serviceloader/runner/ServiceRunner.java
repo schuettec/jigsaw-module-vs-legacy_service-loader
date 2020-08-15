@@ -7,19 +7,8 @@ import com.github.schuettec.serviceloader.api.IncrementService;
 public class ServiceRunner {
 
 	public static void main(String[] args) {
-		ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
 		try {
-			Class<?> legacyImpl = systemClassLoader
-					.loadClass("com.github.schuettec.serviceloader.impl.IncrementServiceImpl");
-			System.out.println("Found class " + legacyImpl);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		try {
-
-			ServiceLoader<IncrementService> serviceLoader = ServiceLoader.load(IncrementService.class,
-					systemClassLoader);
+			ServiceLoader<IncrementService> serviceLoader = ServiceLoader.load(IncrementService.class);
 			IncrementService incrementService = serviceLoader.findFirst().orElseThrow();
 			int increment = incrementService.increment(1);
 			if (increment == 2) {
